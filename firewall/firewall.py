@@ -3,6 +3,7 @@ import pox.openflow.libopenflow_01 as of
 from pox.lib.revent import *
 from pox.lib.addresses import EthAddr
 
+# MAC addresses pairs for blocking traffic between them
 rules = [['00:00:00:00:00:01','00:00:00:00:00:02'],['00:00:00:00:00:02', '00:00:00:00:00:04'],['00:00:00:00:00:08','00:00:00:00:00:03'],['00:00:00:00:00:07','00:00:00:00:00:02']]
 
 class SDNFirewall (EventMixin):

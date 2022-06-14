@@ -7,6 +7,7 @@ from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 
 
+# Enable IP forwarding to use a host as a router
 class LinuxRouter(Node):
     def config(self, **params):
         super(LinuxRouter, self).config(**params)
@@ -25,13 +26,13 @@ class NetworkTopo(Topo):
         r3 = self.addHost('r3', cls=LinuxRouter, ip='10.2.0.1/24')
         r4 = self.addHost('r4', cls=LinuxRouter, ip='10.3.0.1/24')
 
-        # Add 2 switches
+        # Add 4 switches
         s1 = self.addSwitch('s1')
         s2 = self.addSwitch('s2')
         s3 = self.addSwitch('s3')
         s4 = self.addSwitch('s4')     
 
-        # Add host-switch links in the same subnet
+        # Add host-switch links in the relative same subnet
         self.addLink(s1,
                      r1,
                      intfName2='r1-eth1',
@@ -81,7 +82,7 @@ class NetworkTopo(Topo):
                      params1={'ip': '10.103.0.1/24'},
                      params2={'ip': '10.103.0.2/24'})
 
-        # Adding hosts specifying the default route
+        # Adding hosts, specifying the default route
         h1 = self.addHost(name='h1',
                           ip='10.0.0.10/24',
                           defaultRoute='via 10.0.0.1')
@@ -108,7 +109,7 @@ def run():
     topo = NetworkTopo()
     net = Mininet(topo=topo, controller=RemoteController)
 
-    # Add routing for reaching networks that aren't directly connected
+    # Add routes for reaching networks that aren't directly connected: "metric" specifies the priority
     info(net['r1'].cmd("ip route add 10.1.0.0/24 via 10.100.0.2 dev r1-eth2 metric 100"))
     info(net['r1'].cmd("ip route add 10.1.0.0/24 via 10.101.0.2 dev r1-eth3 metric 200"))
     info(net['r1'].cmd("ip route add 10.2.0.0/24 via 10.101.0.2 dev r1-eth3"))

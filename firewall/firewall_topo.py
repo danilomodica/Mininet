@@ -38,6 +38,7 @@ def treeTopo():
     net.addLink( h7, s7 )
     net.addLink( h8, s7 )
     
+    # Configuring network layers/links
     root = s1
     layer1 = [s2,s5]
     layer2 = [s3,s4,s6,s7]
