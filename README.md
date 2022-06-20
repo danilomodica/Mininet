@@ -29,7 +29,7 @@ Use POX controller as a network firewall. Follow these steps:
     - Edit _firewall.py_ **rules** list, to set your firewall rules
     - Open a terminal and launch the POX controller with: 
       
-      > python3 /home/pox/pox.py log.level --DEBUG samples.pretty_log misc.ip_loadbalancer --ip=10.0.1.1 --servers=10.0.0.1,10.0.0.2
+      > python3 /home/pox/pox.py log.level --DEBUG samples.pretty_log misc.firewall
     - Open a new terminal and move to the _firewall_ folder
     - Launch the Mininet topology with: 
       
